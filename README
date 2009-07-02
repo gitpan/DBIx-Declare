@@ -1,0 +1,87 @@
+DBIx-Declare
+
+declare the database access object, specify the sql/stored proc names, arguments and return and have the code generated for you
+
+  use DBIx::Declare
+	MyDB => {
+		data_source  => "dbi:ODBC:Driver=SQL Server;Server=Some;Database=MyDB",
+		type => 'MSSQL',
+		user => '...',
+		pass => '....',
+		attr => { 'RaiseError' => 0, 'AutoCommit' => 1, LongReadLen => 65536 },
+		case => 'sensitive',
+		methods => {
+			get_site_entry_by_id => {
+				sql => "SELECT * FROM sites WHERE SiteId = ?",
+				args => [ qw(id) ],
+				return => '%', # only one row
+			},
+			get_people_entry_by_last_name => {
+				sql => "SELECT * FROM people WHERE last_name = ?",
+				args => [ qw(name) ],
+				return => '@%', # multiple rows
+			},
+			# Although not really recommended, you can also change the database schema
+			drop_table => {
+				sql => "DROP TABLE ?",
+				args => [ qw(table) ],
+				return => '$',
+				noprepare => 1, # For non-prepareable queries
+				noquote => 1, 	# For non-quoteable arguments (like table names)
+			},
+
+			GetATSName => {
+				return => '$',
+			},
+			GetSiteName => {
+				defaults => {
+					SiteID => 3,
+				},
+				return => '$$',
+			},
+		},
+	};
+
+  my $db = MyDB->new();
+
+  my $SiteName = $db->GetSiteName( 457 );
+
+
+INSTALLATION
+
+To install this module, run the following commands:
+
+	perl Build.PL
+	./Build
+	./Build test
+	./Build install
+
+SUPPORT AND DOCUMENTATION
+
+After installing, you can find documentation for this module with the
+perldoc command.
+
+    perldoc DBIx::Declare
+
+You can also look for information at:
+
+    RT, CPAN's request tracker
+        http://rt.cpan.org/NoAuth/Bugs.html?Dist=DBIx-Declare
+
+    AnnoCPAN, Annotated CPAN documentation
+        http://annocpan.org/dist/DBIx-Declare
+
+    CPAN Ratings
+        http://cpanratings.perl.org/d/DBIx-Declare
+
+    Search CPAN
+        http://search.cpan.org/dist/DBIx-Declare
+
+
+COPYRIGHT AND LICENCE
+
+Copyright (C) 2009 Jenda Krynicky
+
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
+

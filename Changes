@@ -1,0 +1,13 @@
+Revision history for DBIx-Declare
+
+0.01.000    May 4 2009
+        First version, still need some testing. only tested with MSSQL.
+
+0.01.003	May 19 2009
+		First public version, tested with MSSQL, mysql and SQLite
+
+0.01.004	May 25 2009
+		Added code caching, some optimizations for methods with a single parameter
+
+0.01.006	Jun 05 2009
+		added more tests including Unicode and code caching and related fixes

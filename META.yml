@@ -1,0 +1,34 @@
+---
+name: DBIx-Declare
+version: 0.01.006
+author:
+  - 'Jenda Krynicky <Jenda@Krynicky.cz>'
+abstract: 'declare the database access object, specify the sql/stored proc names, arguments and return and have the code generated for you'
+license: perl
+resources:
+  license: http://dev.perl.org/licenses/
+build_requires:
+  Clone: 0
+  DBI: 1.28
+  Scalar::Util: 0
+  Test::More: 0
+provides:
+  DBIx::Declare:
+    file: lib/DBIx/Declare.pm
+    version: 0.01.006
+  DBIx::Declare::DB::mssql:
+    file: lib/DBIx/Declare.pm
+  DBIx::Declare::DB::mysql:
+    file: lib/DBIx/Declare.pm
+  DBIx::Declare::DB::pg:
+    file: lib/DBIx/Declare.pm
+  DBIx::Declare::DB::sqlite:
+    file: lib/DBIx/Declare.pm
+  DBIx::Declare::DB::unknown:
+    file: lib/DBIx/Declare.pm
+  DBIx::Declare::Infer:
+    file: lib/DBIx/Declare.pm
+generated_by: Module::Build version 0.2808
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.2.html
+  version: 1.2
